@@ -11,28 +11,13 @@
  */
 class Solution {
 public:
-    int findDepth(TreeNode* root, int depth)
-    {
-        depth++;
-
-        int leftD = 0, rightD = 0;
-
-        if(nullptr != root->left)
-            leftD = max(findDepth(root->left, depth), depth);
-
-        if(nullptr != root->right)
-            rightD = max(findDepth(root->right, depth), depth);
-
-        if(nullptr == root->left && nullptr == root->right)
-            return depth;
-
-        return max(leftD, rightD);
-    }
-
     int maxDepth(TreeNode* root) {
         if(nullptr == root)
             return 0;
+        
+        int left = maxDepth(root->left);
+        int right = maxDepth(root->right);
 
-        return findDepth(root, 0);
+        return max(left, right) + 1;
     }
 };
